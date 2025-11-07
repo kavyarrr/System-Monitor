@@ -1,0 +1,18 @@
+services:
+  system-monitor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: system-monitor
+    # Run in privileged mode to access /proc filesystem
+    privileged: true
+    # Keep container running (interactive mode)
+    stdin_open: true
+    tty: true
+    # Mount /proc from host to container (optional, but cleaner)
+    volumes:
+      - /proc:/host/proc:ro
+    # Override entrypoint for interactive shell if needed
+    # Uncomment below to get shell access instead of running monitor directly
+    # entrypoint: /bin/bash
+

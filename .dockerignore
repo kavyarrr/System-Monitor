@@ -1,0 +1,13 @@
+build/
+*.o
+*.d
+*.a
+*.so
+*.Identifier
+.DS_Store
+.vscode/
+.git/
+.gitignore
+*.md
+!README.md
+
