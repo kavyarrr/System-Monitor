@@ -1,3 +1,5 @@
 /home/kroot/System-Monitor/build/CMakeFiles/monitor.dir
+/home/kroot/System-Monitor/build/CMakeFiles/integration_test.dir
+/home/kroot/System-Monitor/build/CMakeFiles/test.dir
 /home/kroot/System-Monitor/build/CMakeFiles/edit_cache.dir
 /home/kroot/System-Monitor/build/CMakeFiles/rebuild_cache.dir

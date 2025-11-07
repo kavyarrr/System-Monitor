@@ -65,6 +65,16 @@ CMAKE_BINARY_DIR = /home/kroot/System-Monitor/build
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+.PHONY : test/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -129,12 +139,26 @@ monitor/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/build
 .PHONY : monitor/fast
 
+#=============================================================================
+# Target rules for targets named integration_test
+
+# Build rule for target.
+integration_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 integration_test
+.PHONY : integration_test
+
+# fast build rule for target.
+integration_test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/integration_test.dir/build.make CMakeFiles/integration_test.dir/build
+.PHONY : integration_test/fast
+
 src/format.o: src/format.cpp.o
 .PHONY : src/format.o
 
 # target to build an object file
 src/format.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/format.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/integration_test.dir/build.make CMakeFiles/integration_test.dir/src/format.cpp.o
 .PHONY : src/format.cpp.o
 
 src/format.i: src/format.cpp.i
@@ -143,6 +167,7 @@ src/format.i: src/format.cpp.i
 # target to preprocess a source file
 src/format.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/format.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/integration_test.dir/build.make CMakeFiles/integration_test.dir/src/format.cpp.i
 .PHONY : src/format.cpp.i
 
 src/format.s: src/format.cpp.s
@@ -151,6 +176,7 @@ src/format.s: src/format.cpp.s
 # target to generate assembly for a file
 src/format.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/format.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/integration_test.dir/build.make CMakeFiles/integration_test.dir/src/format.cpp.s
 .PHONY : src/format.cpp.s
 
 src/linux_parser.o: src/linux_parser.cpp.o
@@ -159,6 +185,7 @@ src/linux_parser.o: src/linux_parser.cpp.o
 # target to build an object file
 src/linux_parser.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/linux_parser.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/integration_test.dir/build.make CMakeFiles/integration_test.dir/src/linux_parser.cpp.o
 .PHONY : src/linux_parser.cpp.o
 
 src/linux_parser.i: src/linux_parser.cpp.i
@@ -167,6 +194,7 @@ src/linux_parser.i: src/linux_parser.cpp.i
 # target to preprocess a source file
 src/linux_parser.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/linux_parser.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/integration_test.dir/build.make CMakeFiles/integration_test.dir/src/linux_parser.cpp.i
 .PHONY : src/linux_parser.cpp.i
 
 src/linux_parser.s: src/linux_parser.cpp.s
@@ -175,6 +203,7 @@ src/linux_parser.s: src/linux_parser.cpp.s
 # target to generate assembly for a file
 src/linux_parser.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/linux_parser.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/integration_test.dir/build.make CMakeFiles/integration_test.dir/src/linux_parser.cpp.s
 .PHONY : src/linux_parser.cpp.s
 
 src/main.o: src/main.cpp.o
@@ -231,6 +260,7 @@ src/process.o: src/process.cpp.o
 # target to build an object file
 src/process.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/process.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/integration_test.dir/build.make CMakeFiles/integration_test.dir/src/process.cpp.o
 .PHONY : src/process.cpp.o
 
 src/process.i: src/process.cpp.i
@@ -239,6 +269,7 @@ src/process.i: src/process.cpp.i
 # target to preprocess a source file
 src/process.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/process.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/integration_test.dir/build.make CMakeFiles/integration_test.dir/src/process.cpp.i
 .PHONY : src/process.cpp.i
 
 src/process.s: src/process.cpp.s
@@ -247,6 +278,7 @@ src/process.s: src/process.cpp.s
 # target to generate assembly for a file
 src/process.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/process.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/integration_test.dir/build.make CMakeFiles/integration_test.dir/src/process.cpp.s
 .PHONY : src/process.cpp.s
 
 src/processor.o: src/processor.cpp.o
@@ -255,6 +287,7 @@ src/processor.o: src/processor.cpp.o
 # target to build an object file
 src/processor.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/processor.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/integration_test.dir/build.make CMakeFiles/integration_test.dir/src/processor.cpp.o
 .PHONY : src/processor.cpp.o
 
 src/processor.i: src/processor.cpp.i
@@ -263,6 +296,7 @@ src/processor.i: src/processor.cpp.i
 # target to preprocess a source file
 src/processor.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/processor.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/integration_test.dir/build.make CMakeFiles/integration_test.dir/src/processor.cpp.i
 .PHONY : src/processor.cpp.i
 
 src/processor.s: src/processor.cpp.s
@@ -271,6 +305,7 @@ src/processor.s: src/processor.cpp.s
 # target to generate assembly for a file
 src/processor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/processor.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/integration_test.dir/build.make CMakeFiles/integration_test.dir/src/processor.cpp.s
 .PHONY : src/processor.cpp.s
 
 src/system.o: src/system.cpp.o
@@ -279,6 +314,7 @@ src/system.o: src/system.cpp.o
 # target to build an object file
 src/system.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/system.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/integration_test.dir/build.make CMakeFiles/integration_test.dir/src/system.cpp.o
 .PHONY : src/system.cpp.o
 
 src/system.i: src/system.cpp.i
@@ -287,6 +323,7 @@ src/system.i: src/system.cpp.i
 # target to preprocess a source file
 src/system.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/system.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/integration_test.dir/build.make CMakeFiles/integration_test.dir/src/system.cpp.i
 .PHONY : src/system.cpp.i
 
 src/system.s: src/system.cpp.s
@@ -295,7 +332,32 @@ src/system.s: src/system.cpp.s
 # target to generate assembly for a file
 src/system.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/system.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/integration_test.dir/build.make CMakeFiles/integration_test.dir/src/system.cpp.s
 .PHONY : src/system.cpp.s
+
+tests/integration_test.o: tests/integration_test.cpp.o
+.PHONY : tests/integration_test.o
+
+# target to build an object file
+tests/integration_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/integration_test.dir/build.make CMakeFiles/integration_test.dir/tests/integration_test.cpp.o
+.PHONY : tests/integration_test.cpp.o
+
+tests/integration_test.i: tests/integration_test.cpp.i
+.PHONY : tests/integration_test.i
+
+# target to preprocess a source file
+tests/integration_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/integration_test.dir/build.make CMakeFiles/integration_test.dir/tests/integration_test.cpp.i
+.PHONY : tests/integration_test.cpp.i
+
+tests/integration_test.s: tests/integration_test.cpp.s
+.PHONY : tests/integration_test.s
+
+# target to generate assembly for a file
+tests/integration_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/integration_test.dir/build.make CMakeFiles/integration_test.dir/tests/integration_test.cpp.s
+.PHONY : tests/integration_test.cpp.s
 
 # Help Target
 help:
@@ -305,6 +367,8 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... test"
+	@echo "... integration_test"
 	@echo "... monitor"
 	@echo "... src/format.o"
 	@echo "... src/format.i"
@@ -327,6 +391,9 @@ help:
 	@echo "... src/system.o"
 	@echo "... src/system.i"
 	@echo "... src/system.s"
+	@echo "... tests/integration_test.o"
+	@echo "... tests/integration_test.i"
+	@echo "... tests/integration_test.s"
 .PHONY : help
 
 
